@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="GeoUP | Project Homepage">
+  <meta name="description" content="GeoUP learns one geometry-grounded representation for depth estimation, 3D object detection, and semantic occupancy prediction in autonomous driving.">
+  <meta name="keywords" content="autonomous driving, unified 3D perception, depth estimation, 3D detection, semantic occupancy, visual geometry">
+  <meta name="author" content="Longfei Xu, Xiaohui Wang, Zehao Huang, Han Li, Ya Yang, Naiyan Wang, Si Liu">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GeoUP Project Homepage">
+  <meta property="og:title" content="GeoUP">
+  <meta property="og:description" content="Geometry-grounded unified 3D perception for calibrated streaming multi-camera driving scenes.">
+  <meta property="og:image" content="static/images/geoup/occupancy.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GeoUP">
+  <meta name="twitter:description" content="One geometry-grounded latent for surface-, instance-, and volume-level driving perception.">
+  <meta name="twitter:image" content="static/images/geoup/occupancy.png">
+
+  <title>GeoUP | Project Homepage</title>
+
+  <link rel="icon" type="image/png" href="cologo/cologo.png">
+  <link rel="apple-touch-icon" href="cologo/cologo.png">
+  <script>
+    (function () {
+      var storageKey = "colalab-project-theme";
+      var savedTheme = null;
+      try {
+        savedTheme = window.localStorage.getItem(storageKey);
+      } catch (error) {}
+      var systemTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      var theme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : systemTheme;
+      document.documentElement.dataset.theme = theme;
+    }());
+  </script>
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css?v=geoup-20260730">
+  <style>
+    .overview-lead {
+      max-width: var(--content-measure);
+      margin: 0 auto;
+    }
+
+    .overview-logic {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.8rem;
+      align-items: start;
+      width: 100%;
+      max-width: min(1180px, 100%);
+      margin: 2.6rem auto 0;
+    }
+
+    .overview-logic-panel,
+    .overview-input-card,
+    .logic-pill {
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .overview-input-card {
+      grid-column: 1 / -1;
+      width: min(560px, 100%);
+      margin: 0 auto;
+      padding: 0.72rem;
+      border: 1px solid var(--panel-border);
+      background: var(--panel-bg);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.06);
+    }
+
+    .overview-input-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .overview-input-card figcaption {
+      margin-top: 0.65rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 750;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .overview-flow-arrows {
+      grid-column: 1 / -1;
+      display: block;
+      width: min(900px, 92%);
+      height: 118px;
+      margin: -0.05rem auto -0.3rem;
+      overflow: visible;
+    }
+
+    .overview-flow-path {
+      fill: none;
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 16 13;
+      animation: overview-flow 1.4s linear infinite;
+      filter: drop-shadow(0 5px 10px rgba(15, 23, 42, 0.12));
+    }
+
+    .overview-flow-path-muted {
+      stroke: #ef4b34;
+    }
+
+    .overview-flow-path-primary {
+      stroke: #22c55e;
+      animation-delay: -0.45s;
+    }
+
+    @keyframes overview-flow {
+      to {
+        stroke-dashoffset: -29;
+      }
+    }
+
+    .overview-comparison {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .overview-logic-panel {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 1rem;
+      min-height: 0;
+      padding: 1rem;
+      border: 1px solid var(--panel-border);
+      background: var(--panel-bg);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.06);
+    }
+
+    .overview-logic-panel-muted {
+      background: linear-gradient(180deg, rgba(248, 250, 252, 0.96), rgba(241, 245, 249, 0.8)), var(--panel-bg);
+    }
+
+    .overview-logic-panel-primary {
+      border-color: rgba(239, 75, 52, 0.26);
+      background: linear-gradient(180deg, rgba(255, 247, 237, 0.88), rgba(255, 255, 255, 0.94)), var(--panel-bg);
+    }
+
+    .overview-logic-panel h3 {
+      margin: 0.35rem 0 0.8rem;
+      color: var(--heading);
+      font-size: clamp(1.28rem, 1.8vw, 1.65rem);
+      font-weight: 850;
+      line-height: 1.1;
+    }
+
+    .overview-media {
+      overflow: hidden;
+      border: 1px solid var(--panel-border);
+      border-radius: 6px;
+      background: #ffffff;
+      aspect-ratio: 3 / 2;
+    }
+
+    .overview-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .overview-copy {
+      align-self: start;
+    }
+
+    .logic-stack {
+      display: grid;
+      gap: 0.62rem;
+    }
+
+    .logic-pill {
+      position: relative;
+      min-height: 0;
+      padding: 0.04rem 0 0.04rem 1.05rem;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    .logic-pill::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.32rem;
+      width: 4px;
+      height: 0.95rem;
+      border-radius: 99px;
+      background: #94a3b8;
+    }
+
+    .logic-pill-warning::before {
+      background: #ef4b34;
+    }
+
+    .logic-pill-success::before {
+      background: #22c55e;
+    }
+
+    html[data-theme="dark"] .overview-logic-panel-muted {
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.92), rgba(17, 24, 39, 0.94)), var(--panel-bg);
+    }
+
+    html[data-theme="dark"] .overview-logic-panel-primary {
+      background: linear-gradient(180deg, rgba(69, 26, 13, 0.42), rgba(17, 24, 39, 0.94)), var(--panel-bg);
+    }
+
+    html[data-theme="dark"] .logic-pill {
+      border: 0;
+      background: transparent;
+    }
+
+    html[data-theme="dark"] .overview-media {
+      background: #ffffff;
+    }
+
+    .method-showcase {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+      gap: 1.15rem;
+      align-items: stretch;
+      max-width: min(1120px, 100%);
+      margin: 2rem auto 0;
+    }
+
+    .method-visual {
+      overflow: hidden;
+      margin: 0;
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: 0 22px 58px rgba(15, 23, 42, 0.07);
+    }
+
+    .method-visual img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .method-training-flow {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: 1fr auto 1fr;
+      gap: 0.78rem;
+      align-items: stretch;
+    }
+
+    .method-stage-card {
+      min-height: 0;
+      padding: 1.15rem;
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      background: var(--panel-bg);
+      box-shadow: 0 16px 38px rgba(15, 23, 42, 0.055);
+    }
+
+    .method-stage-card h3 {
+      margin: 0.3rem 0 0.65rem;
+      color: var(--heading);
+      font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+      font-weight: 850;
+      line-height: 1.18;
+    }
+
+    .method-stage-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+
+    .method-prior-arrow {
+      display: grid;
+      justify-items: center;
+      gap: 0.35rem;
+      width: min(190px, 70%);
+      margin: -0.15rem auto;
+      color: #ef4b34;
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .method-prior-arrow svg {
+      width: 76px;
+      height: 54px;
+      overflow: visible;
+    }
+
+    .method-prior-arrow path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 5px 10px rgba(239, 75, 52, 0.18));
+    }
+
+    .method-prior-arrow polygon {
+      fill: currentColor;
+      filter: drop-shadow(0 5px 10px rgba(239, 75, 52, 0.18));
+    }
+
+    html[data-theme="dark"] .method-visual {
+      background: #ffffff;
+    }
+
+    @media screen and (max-width: 1024px) {
+      .overview-flow-arrows {
+        width: 100%;
+        height: 100px;
+      }
+
+      .method-training-flow {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .method-prior-arrow {
+        width: min(190px, 70%);
+        margin: -0.15rem auto;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .overview-comparison {
+        grid-template-columns: 1fr;
+      }
+
+      .overview-flow-arrows {
+        height: 92px;
+        margin-bottom: 0;
+      }
+
+      .method-stage-card {
+        min-height: auto;
+      }
+
+      .method-showcase {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media screen and (max-width: 520px) {
+      .overview-input-card,
+      .overview-logic-panel {
+        padding: 0.72rem;
+      }
+
+      .overview-flow-arrows {
+        height: 76px;
+      }
+    }
+
+    .geoup-figure {
+      width: min(1120px, 100%);
+      margin: 2.2rem auto 0;
+      padding: 0.9rem;
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.06);
+    }
+
+    .geoup-figure img,
+    .geoup-figure video {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .geoup-figure figcaption {
+      margin-top: 0.8rem;
+      color: #64748b;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .geoup-figure figcaption strong {
+      color: #1f2937;
+    }
+
+    .geoup-figure-narrow {
+      width: min(880px, 100%);
+    }
+
+    .geoup-key-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      width: min(1120px, 100%);
+      margin: 1.25rem auto 0;
+    }
+
+    .geoup-key-card {
+      min-height: 190px;
+      padding: 1.25rem;
+      border: 1px solid var(--panel-border);
+      border-top: 4px solid var(--key-accent, #ef4b34);
+      border-radius: 8px;
+      background: var(--panel-bg);
+      box-shadow: 0 16px 38px rgba(15, 23, 42, 0.055);
+    }
+
+    .geoup-key-card:nth-child(2) {
+      --key-accent: #4f8cff;
+    }
+
+    .geoup-key-card:nth-child(3) {
+      --key-accent: #2fbf8f;
+    }
+
+    .geoup-key-card span {
+      color: var(--key-accent, #ef4b34);
+      font-size: 0.78rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .geoup-key-card h3 {
+      margin: 0.45rem 0 0.65rem;
+      color: var(--heading);
+      font-size: 1.2rem;
+      font-weight: 850;
+      line-height: 1.2;
+    }
+
+    .geoup-key-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .geoup-benchmark-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      width: min(980px, 100%);
+      margin: 1.6rem auto 0;
+      overflow: hidden;
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      background: var(--panel-bg);
+    }
+
+    .geoup-benchmark-strip span {
+      padding: 0.85rem 0.6rem;
+      border-right: 1px solid var(--panel-border);
+      color: var(--heading);
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .geoup-benchmark-strip span:last-child {
+      border-right: 0;
+    }
+
+    .author-sup-placeholder {
+      visibility: hidden;
+    }
+
+    .resource-card-placeholder {
+      cursor: default;
+      opacity: 0.68;
+    }
+
+    .resource-card-placeholder:hover {
+      background: transparent;
+      transform: none;
+    }
+
+    .data-pipeline-step-5 {
+      grid-column: 1 / 3;
+      border-color: rgba(34, 197, 94, 0.32);
+      background: rgba(240, 253, 244, 0.9);
+    }
+
+    .demo-gallery-viewport {
+      min-height: clamp(430px, 50vw, 660px);
+    }
+
+    .demo-card {
+      top: 10%;
+      width: min(74%, 880px);
+      aspect-ratio: 16 / 9;
+    }
+
+    .demo-card-occupancy {
+      width: min(94%, 1120px);
+      aspect-ratio: 1358 / 514;
+    }
+
+    @media screen and (max-width: 768px) {
+      .geoup-key-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .geoup-key-card {
+        min-height: 0;
+      }
+
+      .geoup-benchmark-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .geoup-benchmark-strip span {
+        border-bottom: 1px solid var(--panel-border);
+      }
+
+      .geoup-benchmark-strip span:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .geoup-benchmark-strip span:last-child {
+        grid-column: 1 / -1;
+        border-bottom: 0;
+      }
+
+      .demo-gallery-viewport {
+        min-height: clamp(300px, 78vw, 500px);
+      }
+
+      .demo-card {
+        top: 12%;
+        width: min(80%, 560px);
+      }
+
+      .demo-card-occupancy {
+        width: min(92%, 560px);
+      }
+
+      .data-half-grid,
+      .data-pie-panel,
+      .data-pie-plot,
+      .data-donut-card,
+      .interactive-panel-copy {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .data-pie-panel {
+        overflow: hidden;
+      }
+
+      .data-donut-card {
+        grid-template-columns: minmax(0, 1fr);
+        min-height: 0;
+        padding: 0.75rem;
+      }
+
+      .data-donut-svg {
+        width: min(100%, 280px);
+      }
+
+      .data-donut-legend {
+        width: 100%;
+      }
+
+      .data-pipeline-step-5 {
+        grid-column: auto;
+      }
+    }
+  </style>
+  <script defer src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script>
+
+    window.ProjectPageConfig = {
+      theme: {
+        defaultMode: "system",
+        storageKey: "colalab-project-theme"
+      },
+      demoAutoplayInterval: 6000,
+      verticalChartAutoplayInterval: 7000,
+      horizontalMetrics: {
+        success: [
+          ["RayDN", 54.1, "#64748b", "#94a3b8", "rgba(100, 116, 139, 0.13)"],
+          ["GeoUP", 57.9, "#4f8cff", "#7aa7ff", "rgba(79, 140, 255, 0.13)"],
+          ["GeoUP (Joint)", 59.2, "#ef4b34", "#f59e0b", "rgba(239, 75, 52, 0.13)"]
+        ],
+        generalization: [
+          ["nuScenes", 59.2, "#0ea5e9", "#35a7ff", "rgba(14, 165, 233, 0.13)"],
+          ["Argoverse 2", 43.6, "#16a34a", "#22c55e", "rgba(34, 197, 94, 0.13)"],
+          ["Waymo", 70.7, "#f97316", "#facc15", "rgba(249, 115, 22, 0.13)"]
+        ],
+        efficiency: [
+          ["Detection mAP", 59.2, "#8b5cf6", "#d946ef", "rgba(139, 92, 246, 0.13)"],
+          ["Occupancy mIoU", 42.3, "#06b6d4", "#2dd4bf", "rgba(6, 182, 212, 0.13)"],
+          ["Planning EPDMS", 91.4, "#ef4b34", "#fb7185", "rgba(239, 75, 52, 0.13)"]
+        ]
+      },
+      verticalCharts: [
+        {
+          id: "nuscenes-detection",
+          title: "nuScenes 3D Detection",
+          xAxisTitle: "Metric",
+          yAxisTitle: "Score",
+          unit: "",
+          categories: ["mAP", "NDS"],
+          series: [
+            { name: "RayDN", values: [54.1, 62.4], color: "#64748b" },
+            { name: "GeoUP", values: [57.9, 64.4], color: "#4f8cff" },
+            { name: "GeoUP (Joint)", values: [59.2, 65.3], color: "#ef4b34", highlight: true }
+          ]
+        },
+        {
+          id: "cross-dataset-detection",
+          title: "Cross-Dataset 3D Detection mAP",
+          xAxisTitle: "Dataset",
+          yAxisTitle: "mAP",
+          unit: "",
+          categories: ["nuScenes", "Argoverse 2", "Waymo"],
+          series: [
+            { name: "Prior SOTA", values: [54.1, 31.6, 60.2], color: "#64748b" },
+            { name: "GeoUP", values: [57.9, 37.2, 67.0], color: "#4f8cff" },
+            { name: "GeoUP (Joint)", values: [59.2, 43.6, 70.7], color: "#ef4b34", highlight: true }
+          ]
+        },
+        {
+          id: "occupancy",
+          title: "Occ3D-nuScenes Semantic Occupancy",
+          xAxisTitle: "Metric",
+          yAxisTitle: "Score",
+          unit: "",
+          categories: ["mIoU", "RayIoU"],
+          series: [
+            { name: "OPUS-V2-L", values: [39.9, 45.2], color: "#64748b" },
+            { name: "GeoUP", values: [41.5, 45.9], color: "#4f8cff" },
+            { name: "GeoUP (Joint)", values: [42.3, 47.0], color: "#ef4b34", highlight: true }
+          ]
+        },
+        {
+          id: "depth",
+          title: "Metric Depth Accuracy",
+          xAxisTitle: "Dataset",
+          yAxisTitle: "delta < 1.25 (%)",
+          unit: "%",
+          categories: ["KITTI", "DDAD"],
+          series: [
+            { name: "VGGT", values: [89.8, 65.4], color: "#64748b" },
+            { name: "GeoUP", values: [93.8, 89.5], color: "#ef4b34", highlight: true },
+            { name: "GeoUP (Joint)", values: [92.9, 87.6], color: "#4f8cff" }
+          ]
+        }
+      ],
+      dataPie: {
+        title: "Joint Training Sampling Ratio",
+        caption: "GeoUP samples nuScenes, Argoverse 2, Waymo, DDAD, and KITTI at an 8:8:9:3:1 ratio.",
+        labels: ["nuScenes", "Argoverse 2", "Waymo", "DDAD", "KITTI"],
+        values: [8, 8, 9, 3, 1],
+        colors: ["#ef6a5b", "#4f8cff", "#2fbf8f", "#f2b84b", "#a78bfa"]
+      },
+      references: [
+        {
+          id: "ref-main",
+          label: "[1]",
+          title: "Geometry-Grounded Unified 3D Perception for Autonomous Driving",
+          authors: "Longfei Xu, Xiaohui Wang, Zehao Huang, Han Li, Ya Yang, Naiyan Wang, and Si Liu",
+          venue: "arXiv preprint arXiv:2608.13147",
+          year: "2026",
+          url: "https://arxiv.org/abs/2608.13147"
+        },
+        {
+          id: "ref-vggt",
+          label: "[2]",
+          title: "Visual Geometry Grounded Transformer",
+          authors: "Wang et al.",
+          venue: "CVPR",
+          year: "2025",
+          url: "#model"
+        }
+      ],
+      footer: {
+        organization: "Colalab",
+        year: 2026
+      },
+      contentTokens: {
+        fontFamily: "Arial, sans-serif",
+        titleFontFamily: "Arial, sans-serif"
+      }
+    };
+
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"], ["$", "$"]],
+        displayMath: [["\\[", "\\]"]]
+      },
+      svg: {
+        fontCache: "global"
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script defer src="static/js/index.js?v=geoup-20260730"></script>
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+  <nav class="page-nav" aria-label="Page sections">
+    <div class="page-nav-inner">
+      <a href="#top" class="page-nav-brand">
+        <img src="cologo/cologo.png" alt="Colalab logo">
+        <span>GeoUP</span>
+      </a>
+      <div class="page-nav-links">
+        <a href="#overview" data-nav-link>Overview</a>
+        <a href="#model" data-nav-link>Model</a>
+        <a href="#data" data-nav-link>Training</a>
+        <a href="#results" data-nav-link>Results</a>
+        <a href="#citation" data-nav-link>Cite</a>
+      </div>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 4V1h-1v3zm0 19v-3h-1v3zm8-11h3v-1h-3zM1 12h3v-1H1zm17.1-6.4 2.1-2.1-.7-.7-2.1 2.1zM3.5 20.2l2.1-2.1-.7-.7-2.1 2.1zm14.6-2.8-.7.7 2.1 2.1.7-.7zM4.9 5.6l.7-.7-2.1-2.1-.7.7zM11.5 7A4.5 4.5 0 1 0 16 11.5 4.5 4.5 0 0 0 11.5 7z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.4 15.1A7.7 7.7 0 0 1 8.9 3.6 9.3 9.3 0 1 0 20.4 15.1z"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="reading-progress" aria-hidden="true">
+      <span data-reading-progress></span>
+    </div>
+  </nav>
+
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 5l-7 7 1.4 1.4 4.6-4.6V19h2V8.8l4.6 4.6L19 12z"></path>
+    </svg>
+  </button>
+
+  <main>
+    <section class="project-hero" id="top" data-hero>
+      <div class="hero-bubbles" aria-hidden="true">
+        <span class="bubble bubble-1"></span>
+        <span class="bubble bubble-2"></span>
+        <span class="bubble bubble-3"></span>
+        <span class="bubble bubble-4"></span>
+        <span class="bubble bubble-5"></span>
+        <span class="bubble bubble-6"></span>
+        <span class="bubble bubble-7"></span>
+        <span class="bubble bubble-8"></span>
+        <span class="bubble bubble-9"></span>
+        <span class="bubble bubble-10"></span>
+        <span class="bubble bubble-11"></span>
+        <span class="bubble bubble-12"></span>
+        <span class="bubble bubble-13"></span>
+        <span class="bubble bubble-14"></span>
+        <span class="bubble bubble-15"></span>
+        <span class="bubble bubble-16"></span>
+        <span class="bubble bubble-17"></span>
+        <span class="bubble bubble-18"></span>
+        <span class="bubble bubble-19"></span>
+        <span class="bubble bubble-20"></span>
+      </div>
+      <div class="hero-title-wrap">
+        <div class="hero-logo-block" aria-hidden="true">
+          <div class="hero-logo-shell">
+            <img src="cologo/cologo.png" alt="" class="hero-logo-image">
+          </div>
+        </div>
+      </div>
+      <div class="cola-surface" aria-hidden="true">
+        <div class="cola-wave cola-wave-back"></div>
+        <div class="cola-wave cola-wave-front"></div>
+      </div>
+      <div class="hero-title-in-cola">
+        <h1 class="publication-title publication-title-cola" data-hero-title>
+          Geometry-Grounded Unified 3D Perception for Autonomous Driving
+        </h1>
+      </div>
+    </section>
+
+    <section class="after-hero">
+      <div class="container content-narrow">
+        <div class="collapsed-title-bar" data-collapsed-title>
+          <h2 class="collapsed-title">
+            Geometry-Grounded Unified 3D Perception for Autonomous Driving
+          </h2>
+          <div class="after-hero-cola" aria-hidden="true">
+            <div class="after-hero-bubbles">
+              <span class="mini-bubble mini-bubble-1"></span>
+              <span class="mini-bubble mini-bubble-2"></span>
+              <span class="mini-bubble mini-bubble-3"></span>
+              <span class="mini-bubble mini-bubble-4"></span>
+              <span class="mini-bubble mini-bubble-5"></span>
+              <span class="mini-bubble mini-bubble-6"></span>
+              <span class="mini-bubble mini-bubble-7"></span>
+              <span class="mini-bubble mini-bubble-8"></span>
+            </div>
+            <div class="after-hero-cola-wave after-hero-cola-wave-back"></div>
+            <div class="after-hero-cola-wave after-hero-cola-wave-front"></div>
+          </div>
+        </div>
+        <div class="authors-block">
+          <div class="author-line author-line-blue">
+            <span class="author-block">Longfei Xu<sup>1,*</sup></span>
+            <span class="author-block">Xiaohui Wang<sup>2,*</sup></span>
+            <span class="author-block">Zehao Huang<sup class="author-sup-placeholder" aria-hidden="true">0</sup></span>
+            <span class="author-block">Han Li<sup>1</sup></span>
+            <span class="author-block">Ya Yang<sup>2</sup></span>
+            <span class="author-block">Naiyan Wang<sup class="author-sup-placeholder" aria-hidden="true">0</sup></span>
+            <span class="author-block">Si Liu<sup>1,&#8224;</sup></span>
+          </div>
+
+          <p class="authors-note">* equal contribution &nbsp;&middot;&nbsp; &#8224; corresponding author</p>
+
+          <div class="affiliation-line">
+            <span>1. Beihang University</span>
+            <span>2. Beijing University of Posts and Telecommunications</span>
+          </div>
+        </div>
+
+        <div class="resource-grid">
+          <a href="https://arxiv.org/abs/2608.13147" target="_blank" rel="noopener noreferrer" class="resource-card">
+            <iconify-icon class="resource-icon resource-icon-paper" icon="academicons:arxiv" aria-hidden="true"></iconify-icon>
+            <span>Paper</span>
+          </a>
+          <a href="https://github.com/buaa-colalab/GeoUP" target="_blank" rel="noopener noreferrer" class="resource-card">
+            <iconify-icon class="resource-icon resource-icon-code" icon="simple-icons:github" aria-hidden="true"></iconify-icon>
+            <span>Code</span>
+          </a>
+          <a href="https://huggingface.co/s1lencexw/GeoUP" target="_blank" rel="noopener noreferrer" class="resource-card">
+            <iconify-icon class="resource-icon resource-icon-model" icon="mdi:weight-kilogram" aria-hidden="true"></iconify-icon>
+            <span>Weights</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section" id="overview">
+      <div class="container content-wide">
+        <div class="overview-lead">
+          <p class="lead-paragraph">
+            We present a <strong>Geo</strong>metry-grounded <strong>U</strong>nified 3D <strong>P</strong>erception
+            (<strong>GeoUP</strong>) framework, which adapts the reconstruction-oriented latent of VGGT to calibrated,
+            streaming multi-camera driving scenes and uses one geometry-grounded representation for metric depth
+            estimation, 3D object detection, and semantic occupancy prediction.
+          </p>
+        </div>
+
+        <figure class="geoup-figure">
+          <video autoplay muted loop playsinline preload="metadata" poster="static/images/geoup/pretraining.png" aria-label="Animated comparison of recognition, geometry, and 3D reconstruction pretraining paradigms">
+            <source src="static/videos/geoup-pretraining.mp4?v=20260730b" type="video/mp4">
+            <img src="static/images/geoup/pretraining.png" alt="Comparison of recognition, geometry, and 3D reconstruction pretraining paradigms">
+          </video>
+          <figcaption><strong>Why reconstruction pretraining?</strong> It provides semantic features, explicit geometry, and multi-image consistency in one representation.</figcaption>
+        </figure>
+
+        <div class="geoup-key-grid" aria-label="GeoUP perception levels">
+          <article class="geoup-key-card">
+            <span>Surface level</span>
+            <h3>Metric depth</h3>
+            <p>Dense image-aligned depth recovers scene surfaces in absolute scale across different camera configurations.</p>
+          </article>
+          <article class="geoup-key-card">
+            <span>Instance level</span>
+            <h3>3D object detection</h3>
+            <p>Object queries read metric location, extent, orientation, and velocity from the shared geometric latent.</p>
+          </article>
+          <article class="geoup-key-card">
+            <span>Volume level</span>
+            <h3>Semantic occupancy</h3>
+            <p>Sparse occupancy queries recover voxel-level scene state and semantics from multi-frame, multi-view features.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section" id="model">
+      <div class="container content-wide">
+        <h2 class="section-title">The Model</h2>
+        <p class="body-paragraph">
+          GeoUP combines image patch tokens with calibration-derived raymap embeddings and camera tokens. A shared
+          Transformer alternates self, temporal, and view attention before task-specific heads decode depth, detection,
+          occupancy, and auxiliary camera pose predictions.
+        </p>
+
+        <figure class="geoup-figure">
+          <img src="static/images/geoup/pipeline.png?v=tex-20260730" alt="Overall GeoUP pipeline from streaming multi-view images to unified 3D perception outputs">
+          <figcaption><strong>Overall pipeline.</strong> Geometry-aware tokens are processed by a factorized spatiotemporal backbone and decoded into heterogeneous 3D perception outputs.</figcaption>
+        </figure>
+
+        <div class="geoup-key-grid" aria-label="GeoUP backbone adaptations">
+          <article class="geoup-key-card">
+            <span>Geometry injection</span>
+            <h3>Calibration-aware raymaps</h3>
+            <p>Patch-aligned Pl&uuml;cker rays derived from intrinsics and poses inject camera geometry and absolute metric scale.</p>
+          </article>
+          <article class="geoup-key-card">
+            <span>Structured interaction</span>
+            <h3>Temporal-view factorization</h3>
+            <p>Temporal attention follows each camera stream while view attention exchanges information across synchronized cameras.</p>
+          </article>
+          <article class="geoup-key-card">
+            <span>Unified readout</span>
+            <h3>Multi-task perception heads</h3>
+            <p>DPT-, RayDN-, and OPUS-V2-style heads read different geometric levels without fragmenting the shared backbone.</p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section content-section" id="data">
+      <div class="container content-wide">
+        <h2 class="section-title">Unified Training</h2>
+        <div class="paragraph-with-reference">
+          <p class="body-paragraph">
+            GeoUP first adapts geometry-pretrained VGGT features to driving scenes with depth and camera supervision.
+            It then jointly learns detection, occupancy, depth, and camera objectives across five datasets. Task masks
+            allow every sample to supervise only the annotations it provides.
+          </p>
+        </div>
+        <div class="geoup-benchmark-strip" aria-label="GeoUP training datasets">
+          <span>nuScenes</span>
+          <span>Argoverse 2</span>
+          <span>Waymo</span>
+          <span>DDAD</span>
+          <span>KITTI</span>
+        </div>
+        <div class="data-half-grid">
+          <div class="data-pie-panel" data-data-pie-panel>
+            <div class="interactive-panel-copy">
+              <span class="eyebrow-label">Dataset sampling</span>
+              <h3>Joint training ratio</h3>
+            </div>
+            <div class="data-pie-plot" data-data-pie aria-label="Interactive dataset composition pie chart"></div>
+          </div>
+          <div class="data-pipeline-panel" aria-label="GeoUP training pipeline">
+            <div class="interactive-panel-copy">
+              <span class="eyebrow-label">Training strategy</span>
+              <h3>From geometry prior to unified perception</h3>
+            </div>
+            <div class="data-pipeline-flow">
+              <svg class="data-pipeline-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <marker id="data-flow-arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M0 0 L10 5 L0 10 Z"></path>
+                  </marker>
+                  <marker id="data-flow-arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M0 0 L10 5 L0 10 Z"></path>
+                  </marker>
+                  <marker id="data-flow-arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M0 0 L10 5 L0 10 Z"></path>
+                  </marker>
+                </defs>
+                <path class="data-flow-line data-flow-line-red" d="M43 15 H57"></path>
+                <path class="data-flow-line data-flow-line-blue" d="M75 25 V40"></path>
+                <path class="data-flow-line data-flow-line-green" d="M57 50 H43"></path>
+                <path class="data-flow-line data-flow-line-blue" d="M25 60 V75"></path>
+              </svg>
+              <div class="data-pipeline-step data-pipeline-step-1">
+                <span>01</span>
+                <strong>VGGT Initialization</strong>
+              </div>
+              <div class="data-pipeline-step data-pipeline-step-2">
+                <span>02</span>
+                <strong>Driving Adaptation</strong>
+              </div>
+              <div class="data-pipeline-step data-pipeline-step-3">
+                <span>03</span>
+                <strong>Datasets Align</strong>
+              </div>
+              <div class="data-pipeline-step data-pipeline-step-4">
+                <span>04</span>
+                <strong>Multi-task Learning</strong>
+              </div>
+              <div class="data-pipeline-step data-pipeline-step-5 data-pipeline-step-final">
+                <span>05</span>
+                <strong>Geometry-grounded Latent</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section" id="results">
+      <div class="container content-wide">
+        <h2 class="section-title">Unified 3D Perception Results</h2>
+        <div class="paragraph-with-reference">
+          <p class="body-paragraph">
+            GeoUP achieves state-of-the-art results across 3D detection, semantic occupancy, and metric depth estimation.
+            Joint multi-dataset training further improves detection on nuScenes, Argoverse 2, and Waymo, while also
+            strengthening occupancy quality on Occ3D-nuScenes. <strong>GeoUP (Joint)</strong> denotes the model trained
+            jointly on nuScenes, Argoverse 2, Waymo, DDAD, and KITTI.
+          </p>
+        </div>
+
+        <div class="vertical-results-panel" data-vertical-results>
+          <div class="vertical-results-header">
+            <div>
+              <span class="eyebrow-label">Five driving benchmarks</span>
+              <h3>Detection, occupancy, and depth</h3>
+            </div>
+          </div>
+          <div class="vertical-chart-stage">
+            <button class="vertical-chart-arrow vertical-chart-prev" type="button" aria-label="Previous chart" data-vertical-prev>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15.4 4.6 8 12l7.4 7.4-1.4 1.4L5.2 12 14 3.2z"></path>
+              </svg>
+            </button>
+            <div class="vertical-charts-viewport">
+              <div class="vertical-charts-grid" data-vertical-charts></div>
+            </div>
+            <button class="vertical-chart-arrow vertical-chart-next" type="button" aria-label="Next chart" data-vertical-next>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m8.6 19.4 7.4-7.4-7.4-7.4L10 3.2 18.8 12 10 20.8z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="vertical-chart-progress" data-vertical-progress aria-label="Chart progress"></div>
+        </div>
+
+        <div class="demo-gallery" data-demo-gallery>
+          <div class="demo-gallery-copy">
+            <span class="eyebrow-label">Qualitative gallery</span>
+            <h3>One latent, three geometric readouts</h3>
+            <p>Compare instance-level detection, volume-level semantic occupancy, and surface-level depth reconstruction.</p>
+          </div>
+          <div class="demo-gallery-stage">
+            <button class="demo-gallery-arrow demo-gallery-prev" type="button" aria-label="Previous demo" data-demo-prev>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15.4 4.6 8 12l7.4 7.4-1.4 1.4L5.2 12 14 3.2z"></path>
+              </svg>
+            </button>
+            <div class="demo-gallery-viewport">
+              <div class="demo-gallery-track" data-demo-track>
+                <article class="demo-card is-active" data-demo-card>
+                  <img src="static/images/geoup/detection-main.png" alt="GeoUP 3D detection comparison over consecutive frames">
+                </article>
+                <article class="demo-card demo-card-occupancy" data-demo-card>
+                  <img src="static/images/geoup/occupancy.png" alt="Supplementary semantic occupancy comparisons showing input images, ground truth, OPUS-V2, and GeoUP">
+                </article>
+                <article class="demo-card" data-demo-card>
+                  <img src="static/images/geoup/depth-main.png" alt="Point maps reconstructed from GeoUP depth predictions">
+                </article>
+              </div>
+            </div>
+            <button class="demo-gallery-arrow demo-gallery-next" type="button" aria-label="Next demo" data-demo-next>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m8.6 19.4 7.4-7.4-7.4-7.4L10 3.2 18.8 12 10 20.8z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="demo-gallery-dots" data-demo-dots></div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section citation-section" id="citation">
+      <div class="container content-wide">
+        <div class="bibtex-header">
+          <h2 class="section-title no-accent">Citation</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16 1H6a2 2 0 0 0-2 2v12h2V3h10zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m0 16H10V7h9z"></path>
+            </svg>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+        <p class="citation-note">Please cite our paper if GeoUP is useful for your research.</p>
+        <div class="references-mobile" data-reference-mobile aria-label="References"></div>
+        <pre id="bibtex-code"><code>@article{xu2026geometry,
+  title={Geometry-Grounded Unified 3D Perception for Autonomous Driving},
+  author={Xu, Longfei and Wang, Xiaohui and Huang, Zehao and Li, Han and Yang, Ya and Wang, Naiyan and Liu, Si},
+  journal={arXiv preprint arXiv:2608.13147},
+  year={2026}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container content-wide">
+      <div class="content has-text-centered">
+        <p data-footer-copy>&copy; 2026 Colalab. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="media-preview-modal" data-media-preview-modal hidden>
+    <button class="media-preview-backdrop" type="button" aria-label="Close preview" data-media-preview-close></button>
+    <figure class="media-preview-frame" role="dialog" aria-modal="true" aria-label="Media preview">
+      <button class="media-preview-close" type="button" aria-label="Close preview" data-media-preview-close>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m6.4 5 5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6l5.6-5.6L5 6.4z"></path>
+        </svg>
+      </button>
+      <div class="media-preview-content" data-media-preview-content></div>
+    </figure>
+  </div>
+</body>
+</html>
